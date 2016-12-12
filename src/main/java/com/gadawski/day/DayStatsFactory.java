@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class DayStatsFactory {
 
-    private List<DayStats> stats;
+    private Map<DayOfWeek, List<DayData>> data;
 
-    private DayStatsFactory(List<DayStats> stats) {
-        this.stats = stats;
+    private DayStatsFactory(Map<DayOfWeek, List<DayData>> data) {
+        this.data = data;
     }
 
     public static DayStatsFactory fromData(List<DayData> dayData) {
@@ -26,18 +26,18 @@ public class DayStatsFactory {
             map.put(day.getDayOfWeek(), list);
         }
 
-        List<DayStats> result = Lists.newArrayList();
-        for (DayOfWeek day : DayOfWeek.values()) {
-            List<DayData> data = map.get(day);
-            if (data != null) {
-                result.add(new DayStats(data));
-            }
-        }
-
-        return new DayStatsFactory(result);
+        return new DayStatsFactory(map);
     }
 
     public List<DayStats> getStats() {
-        return stats;
+        List<DayStats> result = Lists.newArrayList();
+        for (DayOfWeek day : DayOfWeek.values()) {
+            List<DayData> dayData = data.get(day);
+            if (dayData != null) {
+                result.add(new DayStats(dayData));
+            }
+        }
+
+        return result;
     }
 }
