@@ -15,14 +15,24 @@ public class CsvReader {
     }
 
     public List<String> getLines() {
-        InputStream is = null;
+        BufferedReader br = null;
         try {
-            is = new FileInputStream(new File(filePath));
+            InputStream is = new FileInputStream(new File(filePath));
+            br = new BufferedReader(new InputStreamReader(is));
+
+            return br.lines().collect(Collectors.toList());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-        return br.lines().collect(Collectors.toList());
+        throw new RuntimeException("Problem while reading file! [pathname='" + filePath + "']");
     }
 }
