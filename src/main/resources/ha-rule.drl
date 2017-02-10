@@ -1,0 +1,10 @@
+package com.gadawski;
+
+rule "Home automation rule"
+    when
+        $o: Object()
+        // presence
+
+    then
+        System.out.println("Rule fired for object: " + $o.toString());
+end

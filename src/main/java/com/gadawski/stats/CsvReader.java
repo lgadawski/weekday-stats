@@ -1,4 +1,4 @@
-package com.gadawski.reader;
+package com.gadawski.stats.reader;
 
 import java.io.*;
 import java.util.List;

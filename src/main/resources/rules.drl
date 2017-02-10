@@ -1,0 +1,8 @@
+package com.gadawski;
+
+rule "My very first drools rule"
+    when
+        $o: Object()
+    then
+        System.out.println("Rule fired for object: " + $o.toString());
+end

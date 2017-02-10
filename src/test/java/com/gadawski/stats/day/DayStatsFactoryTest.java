@@ -1,4 +1,4 @@
-package com.gadawski.day;
+package com.gadawski.stats.day;
 
 import org.junit.Test;
 
@@ -15,10 +15,10 @@ public class DayStatsFactoryTest {
         String t1 = "2,tuesday,18,18,18,18,18,18,22,22,18,18,18,18,18,18,18,18,18,22,22,22,22,22,22,22,22";
 
         // when
-        DayData dayData1 = new DayData(t1);
+        com.gadawski.stats.day.DayData dayData1 = new com.gadawski.stats.day.DayData(t1);
 
         // then
-        DayStats dayStats = new DayStats(Collections.singletonList(dayData1));
+        com.gadawski.stats.day.DayStats dayStats = new com.gadawski.stats.day.DayStats(Collections.singletonList(dayData1));
         assertThat(dayStats.meanTempAt(0)).isEqualTo(18);
         assertThat(dayStats.meanTempAt(22)).isEqualTo(22);
         assertThat(dayStats.standardDeviationAt(0)).isEqualTo(0);
@@ -33,12 +33,12 @@ public class DayStatsFactoryTest {
         String t3 = "3,tuesday,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20";
 
         // when
-        DayData dayData1 = new DayData(t1);
-        DayData dayData2 = new DayData(t2);
-        DayData dayData3 = new DayData(t3);
+        com.gadawski.stats.day.DayData dayData1 = new com.gadawski.stats.day.DayData(t1);
+        com.gadawski.stats.day.DayData dayData2 = new com.gadawski.stats.day.DayData(t2);
+        com.gadawski.stats.day.DayData dayData3 = new com.gadawski.stats.day.DayData(t3);
 
         // then
-        DayStats dayStats = new DayStats(Arrays.asList(dayData1, dayData2, dayData3));
+        com.gadawski.stats.day.DayStats dayStats = new com.gadawski.stats.day.DayStats(Arrays.asList(dayData1, dayData2, dayData3));
         assertThat(dayStats.meanTempAt(0)).isEqualTo(19);
         assertThat(dayStats.meanTempAt(10)).isEqualTo(19);
         assertThat(dayStats.meanTempAt(20)).isEqualTo(19);

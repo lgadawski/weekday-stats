@@ -1,4 +1,4 @@
-package com.gadawski;
+package com.gadawski.stats;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 

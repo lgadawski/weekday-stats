@@ -1,4 +1,4 @@
-package com.gadawski.day;
+package com.gadawski.stats.day;
 
 import com.google.common.collect.Maps;
 

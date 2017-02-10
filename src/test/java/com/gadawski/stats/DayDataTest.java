@@ -1,6 +1,6 @@
-package com.gadawski;
+package com.gadawski.stats;
 
-import com.gadawski.day.DayData;
+import com.gadawski.stats.day.DayData;
 import org.junit.Test;
 
 import java.time.DayOfWeek;

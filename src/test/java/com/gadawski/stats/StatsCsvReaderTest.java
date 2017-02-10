@@ -1,13 +1,12 @@
-package com.gadawski;
+package com.gadawski.stats;
 
-import com.gadawski.day.DayData;
-import com.gadawski.day.DayStats;
-import com.gadawski.day.DayStatsFactory;
-import com.gadawski.reader.CsvReader;
+import com.gadawski.stats.WeekStats;
+import com.gadawski.stats.day.DayData;
+import com.gadawski.stats.day.DayStats;
+import com.gadawski.stats.reader.CsvReader;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import javax.naming.ldap.LdapName;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.util.List;
@@ -54,7 +53,6 @@ public class StatsCsvReaderTest {
         BigDecimal expectedFridayMean = BigDecimal.valueOf(19 + 19 + 19 + 19).divide(BigDecimal.valueOf(4));
 
         DayStats thursday = weekStats.statsFor(DayOfWeek.THURSDAY);
-        System.out.println("thursday: " + thursday);
         BigDecimal expectedThursdayMean = BigDecimal.valueOf(20 + 22 + 19 + 22).divide(BigDecimal.valueOf(4));
 
         // then

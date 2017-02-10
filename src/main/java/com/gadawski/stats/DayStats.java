@@ -1,6 +1,6 @@
-package com.gadawski.day;
+package com.gadawski.stats.day;
 
-import com.gadawski.HourStats;
+import com.gadawski.stats.HourStats;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -14,14 +14,14 @@ public class DayStats {
     private final Map<Integer, HourStats> map;
     private final DayOfWeek dayOfWeek;
 
-    public DayStats(List<DayData> dayData) {
+    public DayStats(List<com.gadawski.stats.day.DayData> dayData) {
         Preconditions.checkArgument(!dayData.isEmpty());
 
         dayOfWeek = dayData.get(0).getDayOfWeek();
         map = Maps.newHashMap();
         for (int i = 0; i < 24; i++) {
             List<Double> tempsAtHour = Lists.newArrayList();
-            for (DayData data : dayData) {
+            for (com.gadawski.stats.day.DayData data : dayData) {
                 tempsAtHour.add(data.getTemperatureAt(i));
             }
             map.put(i, new HourStats(tempsAtHour));
