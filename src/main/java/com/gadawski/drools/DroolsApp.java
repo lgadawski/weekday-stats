@@ -1,4 +1,4 @@
-package com.gadawski;
+package com.gadawski.drools;
 
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
@@ -16,6 +16,7 @@ public class DroolsApp {
     private void bootstrapDrools() {
         // the KieSession was injected so we can use it
         kieSession.insert("Hi there!");
+//        kieSession.fireUntilHalt();
         int rulesFired = kieSession.fireAllRules();
         System.out.println("Rules fired: " + rulesFired);
     }
