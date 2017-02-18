@@ -12,7 +12,6 @@ import org.kie.api.runtime.KieSession;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(Arquillian.class)
@@ -38,12 +37,26 @@ public class CronRulesTest {
 
         kieSession.insert("Hi there!");
 
-        for (int i = 0; i < 5; i++) {
-            Thread.sleep(6000);
+        for (int i = 0; i < 3; i++) {
+            Thread.sleep(1005);
 
             kieSession.insert("hello + " + i + " ! :D");
         }
 
         kieSession.halt();
+    }
+
+    @Test
+    public void normalFiring() {
+        assertNotNull(kieSession);
+
+        kieSession.insert(new RuleDate());
+        kieSession.insert(new PersonPresence());
+
+        kieSession.fireAllRules();
+
+        kieSession.insert(new RuleDate());
+
+        kieSession.fireAllRules();
     }
 }

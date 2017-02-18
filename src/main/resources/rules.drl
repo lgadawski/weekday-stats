@@ -1,8 +1,15 @@
 package com.gadawski;
 
-rule "My very first drools rule"
+import com.gadawski.drools.*;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
+rule "Home automation rule"
+    //timer (cron:* 0/60 * * * ?)
+    //timer (cron:0/1 * * * * ?)
     when
-        $o: Object()
+        date : RuleDate(date.getDayOfWeek() == DayOfWeek.SUNDAY)
     then
-        System.out.println("Rule fired for object: " + $o.toString());
+        System.out.println("given: " + date);
 end
