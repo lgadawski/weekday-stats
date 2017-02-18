@@ -1,5 +1,8 @@
 package com.gadawski.stats.reader;
 
+import com.gadawski.stats.day.DayData;
+import com.google.common.collect.Lists;
+
 import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,5 +37,15 @@ public class CsvReader {
         }
 
         throw new RuntimeException("Problem while reading file! [pathname='" + filePath + "']");
+    }
+
+    public List<DayData> getData() {
+        List<String> lines = getLines();
+        List<DayData> data = Lists.newArrayList();
+        for (String s : lines.subList(1, lines.size())) {
+            data.add(new DayData(s));
+        }
+
+        return data;
     }
 }

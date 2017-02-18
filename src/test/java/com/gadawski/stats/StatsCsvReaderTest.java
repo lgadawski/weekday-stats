@@ -40,12 +40,8 @@ public class StatsCsvReaderTest {
 
         // when
         CsvReader reader = new CsvReader(filePath);
-        List<String> lines = reader.getLines();
-        List<DayData> data = Lists.newArrayList();
-        for (String s : lines.subList(1, lines.size())) {
-            data.add(new DayData(s));
-        }
-        WeekStats weekStats = new WeekStats(data);
+        WeekStats weekStats = new WeekStats(reader.getData());
+
         DayStats monday = weekStats.statsFor(DayOfWeek.MONDAY);
         BigDecimal expectedMondayMean = BigDecimal.valueOf(18 + 18 + 19 + 18).divide(BigDecimal.valueOf(4));
 

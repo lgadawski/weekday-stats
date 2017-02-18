@@ -1,6 +1,5 @@
 package com.gadawski.stats;
 
-import com.gadawski.stats.HourStats;
 import org.junit.Test;
 
 import java.util.Arrays;

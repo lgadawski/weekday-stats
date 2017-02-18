@@ -11,5 +11,5 @@ rule "Home automation rule"
     when
         date : RuleDate(date.getDayOfWeek() == DayOfWeek.SUNDAY)
     then
-        System.out.println("given: " + date);
+        System.out.println("push data to HA!");
 end
