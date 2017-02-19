@@ -1,4 +1,4 @@
-package com.gadawski.drools;
+package com.gadawski.drools.dynamic;
 
 import com.google.common.io.Resources;
 import org.drools.compiler.lang.DrlDumper;

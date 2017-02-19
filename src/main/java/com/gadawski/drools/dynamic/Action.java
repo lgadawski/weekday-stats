@@ -1,4 +1,4 @@
-package com.gadawski.drools;
+package com.gadawski.drools.dynamic;
 
 public class Action {
 
