@@ -14,3 +14,15 @@ rule "Home automation rule"
     then
         PushMessageUtil.send(29, 0.6);
 end
+
+package com.gadawski.rules;
+
+import com.gadawski.drools.*;
+
+rule "Generated rule number 1"
+when
+    day : RuleDate( day.getDayOfWeek() == DayOfWeek.SUNDAY )
+    day : RuleDate( day.getHour() == 21 )
+then
+// perform relevant action
+end

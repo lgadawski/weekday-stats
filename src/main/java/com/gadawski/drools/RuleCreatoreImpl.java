@@ -38,6 +38,24 @@ public class RuleCreatoreImpl implements RuleCreator {
     }
 
     private void addRule(PackageDescrBuilder builder, DayStats dayStats, int hour) {
+
+//        PackageDescrBuilder builder = DescrFactory.newPackage();
+//        builder.name("com.gadawski.rules");
+//
+//        builder
+//            .newRule()
+//            .name("Generated rule number 1")
+//            .lhs()
+//                .pattern()
+//                    .id("day", false).type("RuleDate")
+//                    .constraint("day.getDayOfWeek() == DayOfWeek." + dayStats.getDayOfWeek()).end()
+//                .pattern()
+//                    .id("day", false).type("RuleDate")
+//                    .constraint("day.getHour() == " + hour).end()
+//                .end()
+//            .rhs("// perform relevant action")
+//            .end();
+
         builder
             .newRule()
             .name("HA rule for day: " + dayStats.getDayOfWeek() + " and hour: " + hour)
@@ -49,12 +67,12 @@ public class RuleCreatoreImpl implements RuleCreator {
                             .id("day", false).type("RuleDate")
                         .constraint("day.getHour() == " + hour).end()
             .end()
-                .rhs("System.out.println(\"push data {" + dayStats.meanTempAt(hour)
-                        + " std: " + dayStats.standardDeviationAt(hour) + "}to HA!\");")
+                .rhs("com.gadawski.paho.PushMessageUtil.send(" +
+                        dayStats.meanTempAt(hour) + ", " + dayStats.standardDeviationAt(hour) + ");")
             .end();
     }
 
-    public WeekStats getWeekStats() {
+    WeekStats getWeekStats() {
         return weekStats;
     }
 }

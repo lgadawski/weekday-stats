@@ -1,10 +1,7 @@
 package com.gadawski.stats;
 
-import com.gadawski.stats.WeekStats;
-import com.gadawski.stats.day.DayData;
 import com.gadawski.stats.day.DayStats;
 import com.gadawski.stats.reader.CsvReader;
-import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -52,13 +49,13 @@ public class StatsCsvReaderTest {
         BigDecimal expectedThursdayMean = BigDecimal.valueOf(20 + 22 + 19 + 22).divide(BigDecimal.valueOf(4));
 
         // then
-        assertThat(monday.meanTempAt(0)).isEqualTo(expectedMondayMean.doubleValue());
-        assertThat(monday.standardDeviationAt(0)).isEqualTo(0.5);
+        assertThat(monday.meanTempAt(0)).isEqualTo(Temperature.valueOf(expectedMondayMean));
+        assertThat(monday.standardDeviationAt(0)).isEqualTo(Temperature.valueOf(0.5));
 
-        assertThat(friday.meanTempAt(10)).isEqualTo(expectedFridayMean.doubleValue());
-        assertThat(friday.standardDeviationAt(10)).isEqualTo(0);
+        assertThat(friday.meanTempAt(10)).isEqualTo(Temperature.valueOf(expectedFridayMean));
+        assertThat(friday.standardDeviationAt(10)).isEqualTo(Temperature.ZERO);
 
-        assertThat(thursday.meanTempAt(22)).isEqualTo(expectedThursdayMean.doubleValue());
-        assertThat(thursday.standardDeviationAt(22)).isEqualTo(1.5);
+        assertThat(thursday.meanTempAt(22)).isEqualTo(Temperature.valueOf(expectedThursdayMean));
+        assertThat(thursday.standardDeviationAt(22)).isEqualTo(Temperature.valueOf(1.5));
     }
 }

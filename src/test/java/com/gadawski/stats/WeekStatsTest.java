@@ -4,6 +4,7 @@ import com.gadawski.stats.day.DayData;
 import com.gadawski.stats.day.DayStats;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.util.Arrays;
 
@@ -33,10 +34,10 @@ public class WeekStatsTest {
 
         DayStats dayStats = weekStats.statsFor(DayOfWeek.TUESDAY);
         assertThat(dayStats).isNotNull();
-        assertThat(dayStats.meanTempAt(0)).isEqualTo(19);
-        assertThat(dayStats.meanTempAt(1)).isEqualTo(18);
-        assertThat(dayStats.standardDeviationAt(0)).isEqualTo(Math.sqrt(2));
-        assertThat(dayStats.standardDeviationAt(1)).isEqualTo(0);
+        assertThat(dayStats.meanTempAt(0)).isEqualTo(Temperature.valueOf(19));
+        assertThat(dayStats.meanTempAt(1)).isEqualTo(Temperature.valueOf(18));
+        assertThat(dayStats.standardDeviationAt(0)).isEqualTo(Temperature.valueOf(Math.sqrt(2)));
+        assertThat(dayStats.standardDeviationAt(1)).isEqualTo(Temperature.valueOf(0));
     }
 }
 

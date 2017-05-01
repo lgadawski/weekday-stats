@@ -14,6 +14,7 @@ public class PushMessageUtil {
             throw new RuntimeException(e);
         }
     }
+
     public static void send(double temperature, double tolerance) {
         String topic = "home-assistant/lukasz/thermostat_settings";
         String msg = "{\"temperature\": " + temperature + ", \"tolerance\": " + tolerance + "}";

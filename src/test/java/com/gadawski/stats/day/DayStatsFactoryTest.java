@@ -1,7 +1,9 @@
 package com.gadawski.stats.day;
 
+import com.gadawski.stats.Temperature;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -15,14 +17,14 @@ public class DayStatsFactoryTest {
         String t1 = "2,tuesday,18,18,18,18,18,18,22,22,18,18,18,18,18,18,18,18,18,22,22,22,22,22,22,22,22";
 
         // when
-        com.gadawski.stats.day.DayData dayData1 = new com.gadawski.stats.day.DayData(t1);
+        DayData dayData1 = new DayData(t1);
 
         // then
-        com.gadawski.stats.day.DayStats dayStats = new com.gadawski.stats.day.DayStats(Collections.singletonList(dayData1));
-        assertThat(dayStats.meanTempAt(0)).isEqualTo(18);
-        assertThat(dayStats.meanTempAt(22)).isEqualTo(22);
-        assertThat(dayStats.standardDeviationAt(0)).isEqualTo(0);
-        assertThat(dayStats.standardDeviationAt(10)).isEqualTo(0);
+        DayStats dayStats = new DayStats(Collections.singletonList(dayData1));
+        assertThat(dayStats.meanTempAt(0)).isEqualTo(Temperature.valueOf(18));
+        assertThat(dayStats.meanTempAt(22)).isEqualTo(Temperature.valueOf(22));
+        assertThat(dayStats.standardDeviationAt(0)).isEqualTo(Temperature.ZERO);
+        assertThat(dayStats.standardDeviationAt(10)).isEqualTo(Temperature.ZERO);
     }
 
     @Test
@@ -33,18 +35,18 @@ public class DayStatsFactoryTest {
         String t3 = "3,tuesday,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20";
 
         // when
-        com.gadawski.stats.day.DayData dayData1 = new com.gadawski.stats.day.DayData(t1);
-        com.gadawski.stats.day.DayData dayData2 = new com.gadawski.stats.day.DayData(t2);
-        com.gadawski.stats.day.DayData dayData3 = new com.gadawski.stats.day.DayData(t3);
+        DayData dayData1 = new DayData(t1);
+        DayData dayData2 = new DayData(t2);
+        DayData dayData3 = new DayData(t3);
 
         // then
-        com.gadawski.stats.day.DayStats dayStats = new com.gadawski.stats.day.DayStats(Arrays.asList(dayData1, dayData2, dayData3));
-        assertThat(dayStats.meanTempAt(0)).isEqualTo(19);
-        assertThat(dayStats.meanTempAt(10)).isEqualTo(19);
-        assertThat(dayStats.meanTempAt(20)).isEqualTo(19);
-        assertThat(dayStats.standardDeviationAt(1)).isEqualTo(1);
-        assertThat(dayStats.standardDeviationAt(11)).isEqualTo(1);
-        assertThat(dayStats.standardDeviationAt(12)).isEqualTo(1);
+        DayStats dayStats = new DayStats(Arrays.asList(dayData1, dayData2, dayData3));
+        assertThat(dayStats.meanTempAt(0)).isEqualTo(Temperature.valueOf(19));
+        assertThat(dayStats.meanTempAt(10)).isEqualTo(Temperature.valueOf(19));
+        assertThat(dayStats.meanTempAt(20)).isEqualTo(Temperature.valueOf(19));
+        assertThat(dayStats.standardDeviationAt(1)).isEqualTo(Temperature.ONE);
+        assertThat(dayStats.standardDeviationAt(11)).isEqualTo(Temperature.ONE);
+        assertThat(dayStats.standardDeviationAt(12)).isEqualTo(Temperature.ONE);
     }
 
 }
