@@ -5,6 +5,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kie.api.cdi.KSession;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(Arquillian.class)
+@Ignore
 public class CronRulesTest {
 
     @Inject
@@ -50,12 +52,12 @@ public class CronRulesTest {
     public void normalFiring() {
         assertNotNull(kieSession);
 
-        kieSession.insert(new RuleDate());
+//        kieSession.insert(new RuleDate());
         kieSession.insert(new PersonPresence());
 
         kieSession.fireAllRules();
 
-        kieSession.insert(new RuleDate());
+//        kieSession.insert(new RuleDate());
 
         kieSession.fireAllRules();
     }

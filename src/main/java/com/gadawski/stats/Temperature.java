@@ -26,4 +26,7 @@ public class Temperature {
         return new Temperature(BigDecimal.valueOf(val).setScale(1, BigDecimal.ROUND_HALF_UP));
     }
 
+    public BigDecimal value() {
+        return value;
+    }
 }

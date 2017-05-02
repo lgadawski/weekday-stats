@@ -2,23 +2,35 @@ package com.gadawski.drools;
 
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-import org.kie.api.cdi.KSession;
 import org.kie.api.runtime.KieSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
+import java.time.LocalDateTime;
 
+@Component
 public class DroolsApp {
 
-    @Inject
-    @KSession()
+    public static final Logger log = LoggerFactory.getLogger(DroolsApp.class);
+
+    @Autowired
     private KieSession kieSession;
 
-    private void bootstrapDrools() {
+    public void bootstrapDrools() {
         // the KieSession was injected so we can use it
-        kieSession.insert("Hi there!");
+        LocalDateTime now = LocalDateTime.now();
+        RuleDate ruleDate = new RuleDate(now.getDayOfWeek(), now.getHour());
+
+        log.debug("Insert RD - {} ", ruleDate);
+
+        kieSession.insert(ruleDate);
+
 //        kieSession.fireUntilHalt();
         int rulesFired = kieSession.fireAllRules();
-        System.out.println("Rules fired: " + rulesFired);
+
+        log.info("Fired - {}", rulesFired);
     }
 
     public static void main(String[] args) {
@@ -31,4 +43,5 @@ public class DroolsApp {
 
         w.shutdown();
     }
+
 }

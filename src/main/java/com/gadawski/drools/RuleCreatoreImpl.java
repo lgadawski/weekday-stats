@@ -19,18 +19,15 @@ public class RuleCreatoreImpl implements RuleCreator {
     @Override
     public String build() {
         PackageDescrBuilder packageDescrBuilder = DescrFactory.newPackage();
-        packageDescrBuilder.name("com.gadawski.drools");
+        packageDescrBuilder.name("com.gadawski.drools;");
 
         for (DayOfWeek day : DayOfWeek.values()) {
             for (int i = 0; i < 24; i++) {
                 addRule(packageDescrBuilder, getDayStats(day), i);
             }
-        }        
-        
-        String rules = new DrlDumper().dump(packageDescrBuilder.getDescr());
-        System.out.println(rules);
+        }
 
-        return rules;
+        return new DrlDumper().dump(packageDescrBuilder.getDescr());
     }
 
     private DayStats getDayStats(DayOfWeek day) {
@@ -38,38 +35,18 @@ public class RuleCreatoreImpl implements RuleCreator {
     }
 
     private void addRule(PackageDescrBuilder builder, DayStats dayStats, int hour) {
-
-//        PackageDescrBuilder builder = DescrFactory.newPackage();
-//        builder.name("com.gadawski.rules");
-//
-//        builder
-//            .newRule()
-//            .name("Generated rule number 1")
-//            .lhs()
-//                .pattern()
-//                    .id("day", false).type("RuleDate")
-//                    .constraint("day.getDayOfWeek() == DayOfWeek." + dayStats.getDayOfWeek()).end()
-//                .pattern()
-//                    .id("day", false).type("RuleDate")
-//                    .constraint("day.getHour() == " + hour).end()
-//                .end()
-//            .rhs("// perform relevant action")
-//            .end();
-
         builder
             .newRule()
             .name("HA rule for day: " + dayStats.getDayOfWeek() + " and hour: " + hour)
                 .lhs()
                     .pattern()
-                    .id("day", false).type("RuleDate")
-                        .constraint("day.getDayOfWeek() == DayOfWeek." + dayStats.getDayOfWeek()).end()
-                        .pattern()
-                            .id("day", false).type("RuleDate")
+                    .id("day", false).type("com.gadawski.drools.RuleDate")
+                        .constraint("day.getDayOfWeek() == java.time.DayOfWeek." + dayStats.getDayOfWeek())
                         .constraint("day.getHour() == " + hour).end()
-            .end()
+                .end()
                 .rhs("com.gadawski.paho.PushMessageUtil.send(" +
-                        dayStats.meanTempAt(hour) + ", " + dayStats.standardDeviationAt(hour) + ");")
-            .end();
+                        dayStats.meanTempAt(hour).value() + ", " + dayStats.standardDeviationAt(hour).value() + ");")
+                .end();
     }
 
     WeekStats getWeekStats() {
