@@ -17,7 +17,7 @@ class PahoDemo {
     }
 
     public void send(String topic, String msg) {
-        log.info("Trying to send msg - '{}' for topic - '{}'", msg, topic);
+        log.info("Sending message - '{}' on topic - '{}'", msg, topic);
 
         try {
             client.connect();

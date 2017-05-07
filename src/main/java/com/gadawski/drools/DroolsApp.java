@@ -5,10 +5,13 @@ import org.jboss.weld.environment.se.WeldContainer;
 import org.kie.api.runtime.KieSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @Component
 public class DroolsApp {
@@ -18,16 +21,13 @@ public class DroolsApp {
     @Autowired
     private KieSession kieSession;
 
-    public void bootstrapDrools() {
+    public void bootstrapDrools(List<Object> data) {
         // the KieSession was injected so we can use it
-        LocalDateTime now = LocalDateTime.now();
-        RuleDate ruleDate = new RuleDate(now.getDayOfWeek(), now.getHour());
+        for (Object o : data) {
+            kieSession.insert(o);
+            log.debug("Insert data - {} ", o);
+        }
 
-        log.debug("Insert RD - {} ", ruleDate);
-
-        kieSession.insert(ruleDate);
-
-//        kieSession.fireUntilHalt();
         int rulesFired = kieSession.fireAllRules();
 
         log.info("Fired - {}", rulesFired);
@@ -39,7 +39,7 @@ public class DroolsApp {
 
         WeldContainer wc = w.initialize();
         DroolsApp app = wc.instance().select(DroolsApp.class).get();
-        app.bootstrapDrools();
+        app.bootstrapDrools(Collections.emptyList());
 
         w.shutdown();
     }

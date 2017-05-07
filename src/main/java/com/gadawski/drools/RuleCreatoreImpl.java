@@ -43,6 +43,8 @@ public class RuleCreatoreImpl implements RuleCreator {
                     .id("day", false).type("com.gadawski.drools.RuleDate")
                         .constraint("day.getDayOfWeek() == java.time.DayOfWeek." + dayStats.getDayOfWeek())
                         .constraint("day.getHour() == " + hour).end()
+                    .pattern()
+                    .id("personPresence", false).type("com.gadawski.drools.PersonPresence").end()
                 .end()
                 .rhs("com.gadawski.paho.PushMessageUtil.send(" +
                         dayStats.meanTempAt(hour).value() + ", " + dayStats.standardDeviationAt(hour).value() + ");")

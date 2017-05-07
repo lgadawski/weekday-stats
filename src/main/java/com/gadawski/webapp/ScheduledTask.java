@@ -1,15 +1,22 @@
 package com.gadawski.webapp;
 
 import com.gadawski.drools.DroolsApp;
+import com.gadawski.drools.PersonPresence;
+import com.gadawski.drools.RuleDate;
+import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
+@ComponentScan(value = "com.gadawski")
 @Component
 public class ScheduledTask {
 
@@ -20,9 +27,26 @@ public class ScheduledTask {
     @Autowired
     private DroolsApp droolsApp;
 
+    @Autowired
+    private UserService userService;
+
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        droolsApp.bootstrapDrools();
+        List<Object> data = Lists.newArrayList();
+
+        LocalDateTime now = LocalDateTime.now();
+        RuleDate ruleDate = new RuleDate(now.getDayOfWeek(), now.getHour());
+
+        data.add(ruleDate);
+
+        if (userService.isLgPresent()) {
+            data.add(new PersonPresence());
+        } else {
+            throw new RuntimeException();
+        }
+
+        droolsApp.bootstrapDrools(data);
+
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
 }
