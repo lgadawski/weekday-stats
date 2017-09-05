@@ -20,6 +20,8 @@ public class RuleCreatorTest {
         CsvReader reader = new CsvReader(filePath);
         WeekStats weekStats = new WeekStats(reader.getData());
 
+        System.out.println(weekStats);
+
         RuleCreator rc = new RuleCreatoreImpl(weekStats);
         String rules = rc.build();
 

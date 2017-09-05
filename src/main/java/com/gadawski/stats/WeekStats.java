@@ -26,8 +26,21 @@ public class WeekStats {
 
     @Override
     public String toString() {
-        return "WeekStats{" +
-                "stats=" + stats +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<DayOfWeek, DayStats> e : stats.entrySet()) {
+            for (int i = 0; i < 24; i++) {
+                DayStats value = e.getValue();
+                sb.append(value.meanTempAt(i).value() + ", " + value.standardDeviationAt(i).value() + "\n");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
+
+//    @Override
+//    public String toString() {
+//        return "WeekStats{" +
+//                "stats=" + stats +
+//                '}';
+//    }
 }
