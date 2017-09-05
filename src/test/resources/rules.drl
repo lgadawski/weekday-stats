@@ -1237,7 +1237,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 10 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(21.8, 0.5);
+com.gadawski.paho.PushMessageUtil.send(21.5, 0.6);
 end
 
 rule "HA rule for day: SUNDAY and hour: 11"
@@ -1245,7 +1245,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 11 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(22.0, 0.8);
+com.gadawski.paho.PushMessageUtil.send(21.8, 0.5);
 end
 
 rule "HA rule for day: SUNDAY and hour: 12"
@@ -1253,7 +1253,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 12 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(22.5, 1.3);
+com.gadawski.paho.PushMessageUtil.send(22.3, 1.0);
 end
 
 rule "HA rule for day: SUNDAY and hour: 13"
@@ -1269,7 +1269,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 14 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(22.3, 0.5);
+com.gadawski.paho.PushMessageUtil.send(22.5, 1.0);
 end
 
 rule "HA rule for day: SUNDAY and hour: 15"
@@ -1301,7 +1301,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 18 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(22.0, 0.8);
+com.gadawski.paho.PushMessageUtil.send(22.3, 1.0);
 end
 
 rule "HA rule for day: SUNDAY and hour: 19"
@@ -1325,7 +1325,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 21 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(20.8, 1.0);
+com.gadawski.paho.PushMessageUtil.send(21.0, 1.2);
 end
 
 rule "HA rule for day: SUNDAY and hour: 22"
@@ -1333,7 +1333,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 22 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(18.8, 1.3);
+com.gadawski.paho.PushMessageUtil.send(19.0, 1.6);
 end
 
 rule "HA rule for day: SUNDAY and hour: 23"
@@ -1341,7 +1341,7 @@ when
     day : com.gadawski.drools.RuleDate( day.getDayOfWeek() == java.time.DayOfWeek.SUNDAY, day.getHour() == 23 )  
     personPresence : com.gadawski.drools.PersonPresence(  )  
 then
-com.gadawski.paho.PushMessageUtil.send(18.0, 0.0);
+com.gadawski.paho.PushMessageUtil.send(18.5, 1.0);
 end
 
 
