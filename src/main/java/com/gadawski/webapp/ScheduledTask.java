@@ -4,9 +4,11 @@ import com.gadawski.drools.DroolsApp;
 import com.gadawski.drools.PersonPresence;
 import com.gadawski.drools.RuleDate;
 import com.google.common.collect.Lists;
+import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -28,9 +30,12 @@ public class ScheduledTask {
     private DroolsApp droolsApp;
 
     @Autowired
+    private ApplicationContext applicationContext;
+
+    @Autowired
     private UserService userService;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 900000)
     public void reportCurrentTime() {
         List<Object> data = Lists.newArrayList();
 
@@ -42,7 +47,8 @@ public class ScheduledTask {
         if (userService.isLgPresent()) {
             data.add(new PersonPresence());
         } else {
-            throw new RuntimeException();
+            log.info("Still nobody lg not present.");
+            return;
         }
 
         droolsApp.bootstrapDrools(data);
